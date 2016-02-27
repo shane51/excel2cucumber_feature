@@ -42,7 +42,8 @@ require 'fileutils'
 
 
 
-    def case_path_mapper(case_path_hash={},testcase)
+    def case_path_mapper(case_path_map={},testcase)
+        case_path_hash = case_path_map
         case_feature = testcase[1]
         case_scenario = testcase[2]
 
