@@ -42,18 +42,18 @@ require 'fileutils'
 
 
 
-    def case_path_mapper(case_path_map={},testcase)
-        case_path_hash = case_path_map
+    def case_path_mapper(case_path_hash={},testcase)
+
         case_feature = testcase[1]
         case_scenario = testcase[2]
 
         case_path = File.join(@app_name,'features',case_feature)
         if case_path_hash.has_key?(case_path)
           case_path_hash[case_path] = [case_path_hash[case_path], case_scenario]
+          case_path_map = case_path_hash
         else
-          case_path_hash.merge!(Hash[case_path,case_scenario])
+          case_path_map = case_path_hash.merge(Hash[case_path,case_scenario])
         end
-        case_path_hash
     end
 
     def case_builder(testcase,file_path)
