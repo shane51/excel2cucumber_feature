@@ -71,32 +71,32 @@ describe Importer do
     expect(feaure_file).to eq(expected_feature)
   end
 
-  # it "when build single case folders, I should see folders and file build successfully" do
-  #   importer = Importer.new("REA_Phase1.xls",current_project_id)
-  #   cases = importer.testcases
-  #   case_path_map_first_case = importer.case_path_mapper({},cases[0])
-  #   importer.build_feature_file_and_folder(case_path_map_first_case,'.',cases[0])
-  #   case_path = case_path_map_first_case.keys.first.to_s
-  #   case_name = case_path_map_first_case.values.first.to_s + '.feature'
-  #
-  #   expected_case_name_full_path = File.join(case_path,case_name)
-  #   expect(File.file?(expected_case_name_full_path)).to eq(true)
-  # end
-  #
-  # it "when build Multipule case folders, I should see folders and files build successfully" do
-  #   importer = Importer.new("REA_Phase1.xls",current_project_id)
-  #   required_title = %w{ 故事 业务功能 业务场景 预置条件 测试步骤 预期结果 测试结果 测试方式 用例等级 }
-  #   importer.build_project_folders(required_title,'.')
-  #
-  #   cases = importer.testcases
-  #   cases.each do |testcase|
-  #     case_path_map_single_case = importer.case_path_mapper({},testcase)
-  #     case_path = case_path_map_single_case.keys.first.to_s
-  #     case_name = case_path_map_single_case.values.first.to_s + '.feature'
-  #     expected_case_name_full_path = File.join(case_path,case_name)
-  #     expect(File.file?(expected_case_name_full_path)).to eq(true)
-  #   end
-  # end
+  it "when build single case folders, I should see folders and file build successfully" do
+    importer = Importer.new("REA_Phase1.xls",current_project_id)
+    cases = importer.testcases
+    case_path_map_first_case = importer.case_path_mapper({},cases[0])
+    importer.build_feature_file_and_folder(case_path_map_first_case,'.',cases[0])
+    case_path = case_path_map_first_case.keys.first.to_s
+    case_name = case_path_map_first_case.values.first.to_s + '.feature'
+
+    expected_case_name_full_path = File.join(case_path,case_name)
+    expect(File.file?(expected_case_name_full_path)).to eq(true)
+  end
+
+  it "when build Multipule case folders, I should see folders and files build successfully" do
+    importer = Importer.new("REA_Phase1.xls",current_project_id)
+    required_title = %w{ 故事 业务功能 业务场景 预置条件 测试步骤 预期结果 测试结果 测试方式 用例等级 }
+    importer.build_project_folders(required_title,'.')
+
+    cases = importer.testcases
+    cases.each do |testcase|
+      case_path_map_single_case = importer.case_path_mapper({},testcase)
+      case_path = case_path_map_single_case.keys.first.to_s
+      case_name = case_path_map_single_case.values.first.to_s + '.feature'
+      expected_case_name_full_path = File.join(case_path,case_name)
+      expect(File.file?(expected_case_name_full_path)).to eq(true)
+    end
+  end
 
 
 end
