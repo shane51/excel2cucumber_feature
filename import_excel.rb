@@ -66,11 +66,13 @@ require 'fileutils'
       feature_file_name = "#{case_scenario}" + ".feature"
       feature_file_path = File.join(file_path,feature_file_name)
 
+      feature_tag = case_story.nil? ? "\n" : "\n@#{case_story}\n"
+
       feature_file << "# language: zh-CN\n"
-      feature_file << "\n@" + "#{case_story}\n"
+      feature_file << feature_tag
       feature_file << "功能: " + "#{case_feature}\n"
       feature_file << "\n    场景: " + "#{case_scenario}\n"
-      feature_file << "\n        " + step_formater(case_assumption).join("\n        ")
+      feature_file << "    \n        " + step_formater(case_assumption).join("\n        ")
       feature_file << "\n        " + step_formater(case_steps).join("\n        ")
       feature_file << "\n        " + step_formater(case_validation).join("\n        ")
 
@@ -79,11 +81,16 @@ require 'fileutils'
 
     def step_formater(case_steps)
       new_case_steps = []
-      case_steps.each_line do |step|
-        step.gsub!(/^\d\.\s/, '')
-        step.gsub!(/\，/, '')
-        step.gsub!(/\n/, '')
-        new_case_steps << step + "\n"
+      if case_steps.length <= 1
+
+
+      else
+        case_steps.each_line do |step|
+          step.gsub!(/^\d\.\s/, '')
+          step.gsub!(/\，/, '')
+          step.gsub!(/\n/, '')
+          new_case_steps << step + "\n    "
+        end
       end
       new_case_steps
     end

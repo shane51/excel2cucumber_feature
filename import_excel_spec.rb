@@ -41,7 +41,7 @@ describe Importer do
     expect(case_path_hash_two_level_feature).to eq(Hash["#{current_project_id}" + '/features/login/login','普通用户登陆'])
   end
 
-  it "when parse 2 case row, I should  get hash about case path and case name" do
+  it "when parse 2 cases row, I should  get hash about case path and case name" do
     importer = Importer.new("REA_Phase1.xls",current_project_id)
     testcase1 = %w{ 登录 login 普通用户登陆 我等待登录页面 我输入用户名并登录 登录成功}
     testcase2 = %w{ 登录 logout VIP用户登陆 我等待登录页面 我输入用户名并登录 登录成功}
@@ -59,7 +59,7 @@ describe Importer do
     case_steps = cases[0][4]
     case_steps_array = importer.step_formater(case_steps)
     # expected_steps_array = ['当 我在第"1"个输入框里输入"gossipgeek@thoughtworks.com"', '当 我在第"2"个输入框里输入"pass1234"', '当 我按下"登录"按钮']
-    expected_steps_array = ["当 我在第\"1\"个输入框里输入\"gossipgeek@thoughtworks.com\"\n", "当 我在第\"2\"个输入框里输入\"pass1234\"\n", "当 我按下\"登录\"按钮\n"]
+    expected_steps_array = ["当 我在第\"1\"个输入框里输入\"gossipgeek@thoughtworks.com\"\n    ", "当 我在第\"2\"个输入框里输入\"pass1234\"\n    ", "当 我按下\"登录\"按钮\n    "]
     expect(case_steps_array).to eq(expected_steps_array)
   end
 
@@ -99,7 +99,7 @@ describe Importer do
       expected_case_name_full_path = File.join(test_project_root,case_path,case_name)
       expect(File.file?(expected_case_name_full_path)).to eq(true)
     end
-    FileUtils.rm_rf ["#{test_project_root}/#{current_project_id}"]
+    #FileUtils.rm_rf ["#{test_project_root}/#{current_project_id}"]
   end
 
 
